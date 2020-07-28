@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_28_072706) do
+ActiveRecord::Schema.define(version: 2020_07_28_073322) do
 
   create_table "credit_reports", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -29,6 +29,15 @@ ActiveRecord::Schema.define(version: 2020_07_28_072706) do
     t.index ["user_id"], name: "index_limits_on_user_id"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.integer "type"
+    t.decimal "amount"
+    t.integer "credit_report_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["credit_report_id"], name: "index_transactions_on_credit_report_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
@@ -38,4 +47,5 @@ ActiveRecord::Schema.define(version: 2020_07_28_072706) do
 
   add_foreign_key "credit_reports", "users"
   add_foreign_key "limits", "users"
+  add_foreign_key "transactions", "credit_reports"
 end
