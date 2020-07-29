@@ -24,16 +24,16 @@ Imagine that you're writing software for a credit report.  Implement a program t
 
 ## Requirements
 - Your program must accept input as a API
-- On the API payload will in the format as follows:
-  Bob Doe 1001001234 Limit $800
-  Jane Doe 1001001235 Limit $500
-  Bob Doe 1001001234 Charge $400
-  Jane Doe 1001001235 Charge $300
+- On the API payload will in the format as follows:\
+  Bob Doe 1001001234 Limit $800\
+  Jane Doe 1001001235 Limit $500\
+  Bob Doe 1001001234 Charge $400\
+  Jane Doe 1001001235 Charge $300\
   Bob Doe 1001001234 Add $100
-- Your program has to be able to produce the following output given the previous example:
-  Total debt:
-    Bob Doe: $300 ??? Should probably be $500
-    Jane Doe: $200
+- Your program has to be able to produce the following output given the previous example:\
+  Total debt:\
+  Bob Doe: $300 ??? Should probably be $500\
+  Jane Doe: $200
 
 - Implement your solution using ruby, keep in mind you'll be asked to modify it on the interview.
 - Include a README with an overview on your design decisions, and how to run your code. 
