@@ -14,23 +14,15 @@ ActiveRecord::Schema.define(version: 2020_07_28_073322) do
 
   create_table "credit_reports", force: :cascade do |t|
     t.integer "user_id", null: false
-    t.integer "uuid"
+    t.string "uuid"
     t.decimal "limit"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_credit_reports_on_user_id"
   end
 
-  create_table "limits", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "amount", default: 0
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["user_id"], name: "index_limits_on_user_id"
-  end
-
   create_table "transactions", force: :cascade do |t|
-    t.integer "type"
+    t.integer "transaction_type"
     t.decimal "amount"
     t.integer "credit_report_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -46,6 +38,5 @@ ActiveRecord::Schema.define(version: 2020_07_28_073322) do
   end
 
   add_foreign_key "credit_reports", "users"
-  add_foreign_key "limits", "users"
   add_foreign_key "transactions", "credit_reports"
 end
