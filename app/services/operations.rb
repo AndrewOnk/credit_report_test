@@ -18,7 +18,7 @@ class Operations
     @transactions = @body.split(/\n+/).map do |transaction_line|
       split_line = Operations::SplitTransactionLine.new(transaction_line)
       if split_line.errors.present?
-        @errors.push(split_line.errors)
+        @errors += split_line.errors
         next
       end
 
@@ -27,7 +27,7 @@ class Operations
       credit_report = get_credit_report(split_line.uuid, user, transaction)
       transaction.new_transaction_model(credit_report)
       unless transaction.valid?
-        @errors.push(transaction.errors)
+        @errors += transaction.errors
         next
       end
       transaction

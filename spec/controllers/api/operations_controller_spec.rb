@@ -38,5 +38,29 @@ RSpec.describe Api::OperationsController, type: :controller do
       body = JSON.parse(response.body)
       expect(body['transactions_created']).to eq(5)
     end
+
+    it 'returns error when invalid parse payload is sent' do
+      invalid_json = {
+        "body": "1001001234 Limit $800\n Jane Doe 1001001235 Limit $500"
+      }
+      post :create, params: {data: invalid_json, format: :json}
+
+      expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(response).to have_http_status(422)
+      body = JSON.parse(response.body)
+      expect(body['errors']).to eq(["Invalid transaction line: 1001001234 Limit $800"])
+    end
+
+    it 'returns error when invalid transaction type in payload' do
+      invalid_json = {
+        "body": "Bob Doe 1001001234 Limit $800\n Bob Doe 1001001234 Charge! $500"
+      }
+      post :create, params: {data: invalid_json, format: :json}
+
+      expect(response.content_type).to eq("application/json; charset=utf-8")
+      expect(response).to have_http_status(422)
+      body = JSON.parse(response.body)
+      expect(body['errors']).to eq(["'Charge!' is not a valid transaction_type"])
+    end
   end
 end

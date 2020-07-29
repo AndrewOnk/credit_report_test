@@ -7,6 +7,7 @@ class CreditReport < ApplicationRecord
   }
 
   validates_presence_of :user, :uuid, :limit
+  validates_numericality_of :limit, greater_than_or_equal_to: 0
 
   def balance
     balance = 0

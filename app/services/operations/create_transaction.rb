@@ -22,9 +22,10 @@ class Operations
     end
 
     def valid?
-      unless @transaction&.valid?
-        @errors.push(@transaction.errors.full_messages) unless @transaction.valid?
+      if @transaction && !@transaction.valid?
+        @errors.push(@transaction.errors.full_messages)
       end
+
       @errors.empty?
     end
   end

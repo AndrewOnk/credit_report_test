@@ -10,6 +10,7 @@ RSpec.describe CreditReport, type: :model do
     it { validate_presence_of(:user) }
     it { validate_presence_of(:uuid) }
     it { validate_presence_of(:limit) }
+    it { validate_numericality_of(:limit).is_greater_than_or_equal_to(0) }
   end
 
   describe '#balance' do
