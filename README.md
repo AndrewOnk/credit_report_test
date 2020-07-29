@@ -4,11 +4,20 @@ Steps are necessary to get the application up and running:
 Requirements:
 * Ruby version: 2.5.8
 * sqlite3 version: 3.28.0
-* Database: 
+
+## To run application:
 - rails db:create
 - rails db:migrate
-* To run the test suite: rspec
+- rails s
 
+## To run the test suite: 
+- rspec
+
+## To test API via e.g. Postman:
+API supports json and xml formats. json|xml could be added to url(not required)
+- POST http://localhost:3000/api/v1/operations
+- GET http://localhost:3000/api/v1/balances
+ 
 #Task:
 
 Imagine that you're writing software for a credit report.  Implement a program that will add new credit reports, process charges, credits against them, finally display summary information.
@@ -33,7 +42,7 @@ Imagine that you're writing software for a credit report.  Implement a program t
 
 Models:
 - Users have many Credit Reports
-- Each credit report has many Transactions
+- Each Credit Report has many Transactions
 
 There are Operations and Balance controllers:
 - Operations controller - creates credit reports from the offered payload(json/xml)
